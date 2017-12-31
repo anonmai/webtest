@@ -38,20 +38,18 @@ def checkresult(x):
     resultMsg(browser.is_text_present(x))  
 ''' 
 def testLogin(desc, username, password, result):  
-    """ 
-        fill login form message and submit, check result message and print 
-    """  
     output(desc)  
     browser.fill('TPL_username',username.decode)  
     browser.fill('TPL_password',password.decode)
     browser.find_by_value('登录').first.click()  
     checkresult(result)  
 '''
-def testLogin(desc, username, password):
+def testLogin(desc, username, password, result):
     output(desc)
     browser.fill('UserName', username)
     browser.fill('Password', password)
     browser.find_by_name('Submit').first.click()
+    checkresult(result)
 
 
 __testUrl = 'http://www.syhs.org/User/Login.asp'  
@@ -63,8 +61,13 @@ browser.visit(__testUrl)
 output("测试页面:"+browser.title)  
   
 try:  
-    testLogin('测试输入数字','1','1')
-    testLogin('测试输入字母','a','b')
+'''
+    testLogin('测试输入数字','1','1','找不到')
+    testLogin('测试输入字母','a','b'，'找不到')
+    testLogin('测试输入字母','a','b'，'找不到')
+    testLogin('测试输入字母','a','b'，'找不到')
+'''
+    testLogin('测试注册用户','webtest','testweb82'，'尚未通过认证')
 
 except Exception as x:  
     print (x)
